@@ -82,47 +82,7 @@ export default function MessageForm({
         </p>
       </div>
 
-      {/* Capacity indicator */}
-      <div style={{ width: "100%", maxWidth: "400px" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            fontSize: "0.75rem",
-            color: "var(--color-text-muted)",
-            marginBottom: "6px",
-          }}
-        >
-          <span>Carga del sistema</span>
-          <span>
-            {messageCount} / {carryingCapacity}
-          </span>
-        </div>
-        <div
-          style={{
-            width: "100%",
-            height: "6px",
-            backgroundColor: "var(--color-border)",
-            borderRadius: "3px",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              height: "100%",
-              width: `${progress}%`,
-              backgroundColor:
-                progress < 60
-                  ? "var(--color-success)"
-                  : progress < 85
-                  ? "#eab308"
-                  : "#ef4444",
-              borderRadius: "3px",
-              transition: "width 0.3s ease, background-color 0.3s ease",
-            }}
-          />
-        </div>
-      </div>
+
 
       {/* Form */}
       <form
