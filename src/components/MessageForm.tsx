@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 interface MessageFormProps {
   messageCount: number;
@@ -28,7 +28,7 @@ export default function MessageForm({
     setStatus("sending");
     setText("");
 
-    const { error } = await supabase.from("mensajes").insert({ texto: trimmed });
+    const { error } = await getSupabase().from("mensajes").insert({ texto: trimmed });
 
     if (error) {
       setStatus("error");

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import MessageForm from "@/components/MessageForm";
 import CollapseScreen from "@/components/CollapseScreen";
 
@@ -12,6 +12,8 @@ export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
+    const supabase = getSupabase();
+
     // 1. Fetch initial count
     const fetchCount = async () => {
       const { count, error } = await supabase
