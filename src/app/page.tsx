@@ -5,7 +5,7 @@ import { getSupabase } from "@/lib/supabase";
 import MessageForm from "@/components/MessageForm";
 import CollapseScreen from "@/components/CollapseScreen";
 
-const CARRYING_CAPACITY = 150;
+const CARRYING_CAPACITY = 30;
 
 export default function Home() {
   const [messageCount, setMessageCount] = useState<number | null>(null);
@@ -39,7 +39,8 @@ export default function Home() {
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "mensajes" },
-        () => {
+        (payload) => {
+          console.log("Nuevo mensaje recibido en Realtime:", payload);
           setMessageCount((prev) => {
             const newCount = (prev ?? 0) + 1;
             if (newCount > CARRYING_CAPACITY) {
@@ -49,7 +50,9 @@ export default function Home() {
           });
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+        console.log("Estado de suscripción Realtime:", status);
+      });
 
     return () => {
       supabase.removeChannel(channel);
